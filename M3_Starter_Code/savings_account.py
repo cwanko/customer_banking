@@ -5,7 +5,7 @@ from Account import Account
 # Define a function for the Savings Account
 class savings_account:
 
- def __init__(self, balance, interest)
+ def __init__(self, balance, interest):
     self.balance = balance
     self.interest = interest/100
 
