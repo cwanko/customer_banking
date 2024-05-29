@@ -18,6 +18,9 @@ class SavingsAccount(Account):
         interest_earned = self.balance * self.interest * (months / 12)
         self.balance += interest_earned
         return self.balance, interest_earned
+                                                      # remove L21-L23 later
+def create_savings_account(balance, interest_rate, months):
+    return SavingsAccount(balance, interest_rate, months)
 
 
 # Input from the user

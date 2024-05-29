@@ -1,6 +1,3 @@
-"""Import the Account class from the Account.py file."""
-# ADD YOUR CODE HERE
-
 from Account import Account 
 
 def create_cd_account(balance, interest_rate, months):
@@ -15,67 +12,43 @@ def create_cd_account(balance, interest_rate, months):
         float: The updated CD account balance after adding the interest earned.
         And returns the interest earned.
     """
-    # Create an instance of the `Account` class and pass in the balance and interest parameters.
-    #  Hint: You need to add the interest as a value, i.e, 0.
-    # ADD YOUR CODE HERE
+    cd_account_instance = CDAccount(balance, interest_rate)
+    updated_balance, interest_earned = cd_account_instance.calculate_interest(months)
+    cd_account_instance.set_balance(updated_balance)
+    cd_account_instance.set_interest(interest_earned)
+    return updated_balance, interest_earned
 
 class Account:
     def __init__(self, balance, interest=0):
         self.balance = balance
         self.interest = interest / 100  # Convert interest rate from percentage to decimal
 
-balance = float(input("Enter the initial balance of the account: "))
-interest = float(input("Enter the interest rate for the CD account (in percentage): "))
-
-account_instance = Account(balance)
-
-print("Account details:")
-print("Balance:", account_instance.balance)
-print("Interest Rate:", account_instance.interest * 100, "%")
-
-    # Calculate interest earned
-    # ADD YOUR CODE HERE
-interest_earned = account_instance.calculate_interest()
-
-    # Update the CD account balance by adding the interest earned
-    # ADD YOUR CODE HERE
-
-class cd_account(Account):
-    def __init__(self, balance, interest):
-        super().__init__(balance, interest)
-
-    def updated_balance(self):
-        interest_earned = self.calculate_interest()
-        self.balance += interest_earned
-        return self.balance, interest_earned
-
-cd_account_instance = cd_account(balance, interest)
-
-# Calculate and update balance with interest earned
-
-updated_balance, interest_earned = cd_account_instance.updated_balance()
-
-print("Updated balance of the CD account:",updated_balance)
-
-    # Pass the updated_balance to the set balance method using the instance of the CDAccount class.
-    # ADD YOUR CODE HERE
-
-def set_balance(self, updated_balance):
+    def set_balance(self, updated_balance):
         self.balance = updated_balance
 
+    def set_interest(self, interest_earned):
+        self.interest = interest_earned / self.balance if self.balance != 0 else 0
 
-    # Pass the interest_earned to the set interest method using the instance of the CDAccount class.
-    # ADD YOUR CODE HERE
+class CDAccount(Account):
+    def __init__(self, balance, interest_rate):
+        super().__init__(balance, interest_rate)
 
-def set_interest(self, interest_earned):
-        self.interest = interest_earned / self.balance
-        return self.interest
+    def calculate_interest(self, months):
+        interest_earned = self.balance * self.interest * (months / 12)
+        updated_balance = self.balance + interest_earned
+        return updated_balance, interest_earned
 
-_, interest_earned = cd_account_instance.update_balance()
-updated_interest_rate = cd_account_instance.set_interest(interest_earned)
+# Input from the user
+balance = float(input("Enter the initial balance of the account: "))
+interest_rate = float(input("Enter the interest rate for the CD account (in percentage): "))
+months = int(input("Enter the number of months: "))
 
-    # Return the updated balance and interest earned.
-     # ADD YOUR CODE HERE
+# Create a CD account and calculate interest
+updated_balance, interest_earned = create_cd_account(balance, interest_rate, months)
 
-print("Updated balance of the cd_account:", updated_balance)
-print("Interest earned on the cd_account:", interest_earned)
+# Print account details
+print("Account details:")
+print("Initial Balance:", balance)
+print("Interest Rate:", interest_rate, "%")
+print("Updated Balance:", updated_balance)
+print("Interest Earned:", interest_earned)
