@@ -1,12 +1,11 @@
-
-    # Import the create_cd_account and create_savings_account functions
+ # Import the create_cd_account and create_savings_account functions
 from cd_account import create_cd_account
 from savings_account import create_savings_account
 
 # Define the main function
 def main():
     # Prompting the user to set the savings balance
-    savings_balance = float(input("Enter the savings balance: "))
+    balance = float(input("Enter the savings balance: "))
 
     # Prompting the user to set the interest rate
     interest_rate = float(input("Enter the interest rate (in percentage): "))
@@ -15,10 +14,12 @@ def main():
     months = int(input("Enter the number of months: "))
 
     # Calling the create_savings_account function and passing in the variables
-    savings_account = create_savings_account(savings_balance, interest_rate, months)
-
+    savings_account = create_savings_account(balance, interest_rate, months)
+    updated_balance, interest_earned = savings_account.calculate_interest(months)
     # Calculating interest earned
     interest_earned = savings_account.calculate_interest()
+
+    updated_balance, interest_earned = create_cd_account(balance, interest_rate, months)
 
     # Printing out the interest earned and updated savings account balance
     print(f"Interest earned on savings account: ${interest_earned:.2f}")
@@ -43,5 +44,5 @@ def main():
     print(f"Interest earned on CD account: ${cd_interest_earned:.2f}")
     print(f"Updated CD account balance with interest earned: ${cd_account.balance:.2f}")
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+ #   main()
